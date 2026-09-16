@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ENTECH IT — Homepage
 
-## Getting Started
+Premium, dark, mobile-first homepage redesign built with Next.js (App Router), Tailwind CSS v4, TypeScript and Framer Motion.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app/page.tsx` — assembles the homepage sections
+- `src/components/` — Hero, ServiceCards, EstimatePanel, BookingForm, Reviews, Nav, Footer
+- `src/data/services.ts` — the 6 repair types, pricing and copy shown in the cards and estimate panel
+- `src/data/reviews.ts` — testimonial content
+- `src/app/api/enquiry/route.ts` — receives the booking form submission and emails it
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Sending enquiries to your inbox
 
-## Learn More
+The booking form POSTs to `/api/enquiry`, which sends via [Resend](https://resend.com). Until you set an API key, submissions are accepted and logged to the server console instead of emailed — nothing is lost, but you won't get a real email until this is configured.
 
-To learn more about Next.js, take a look at the following resources:
+Add to `.env.local`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+RESEND_API_KEY=your_resend_api_key
+ENQUIRY_TO_EMAIL=you@yourdomain.com
+ENQUIRY_FROM_EMAIL="ENTECH IT <enquiries@yourdomain.com>"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`ENQUIRY_TO_EMAIL` defaults to `tentsie@gmail.com` if unset. `ENQUIRY_FROM_EMAIL` must be a domain verified in Resend before it'll deliver in production.
 
-## Deploy on Vercel
+## Photography
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Card and hero images currently point to Unsplash placeholder URLs (`src/data/services.ts`, `src/components/Hero.tsx`) so the layout can be judged with real photography weight. Swap these for your own shots before launch — same aspect ratios (hero: wide/landscape, cards: 4:3).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Editing prices
+
+All pricing lives in `src/data/services.ts` — update `priceLabel` and `priceNote` there; both the service cards and the instant estimate panel read from the same source, so they can't drift out of sync.

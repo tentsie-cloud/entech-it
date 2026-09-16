@@ -1,0 +1,39 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-border"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <a
+          href="#top"
+          className="font-display text-lg font-extrabold tracking-tight text-foreground"
+        >
+          ENTECH<span className="text-accent">IT</span>
+        </a>
+        <a
+          href="#book"
+          className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Book a Repair
+        </a>
+      </div>
+    </header>
+  );
+}
