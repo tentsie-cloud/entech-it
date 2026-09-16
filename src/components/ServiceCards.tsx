@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { services } from "@/data/services";
 import { useSelection } from "@/context/selection-context";
 
 export default function ServiceCards() {
   const { selectedId, setSelectedId } = useSelection();
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id="services" className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
@@ -38,14 +39,29 @@ export default function ServiceCards() {
                   : "ring-1 ring-border hover:ring-border-strong"
               }`}
             >
-              <Image
-                src={service.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 transition-opacity" />
+              {service.video && !reduceMotion ? (
+                <video
+                  src={service.video}
+                  poster={service.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : service.image ? (
+                <Image
+                  src={service.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-surface-raised via-surface to-background" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/15 transition-opacity" />
               <div
                 className={`absolute inset-0 bg-accent/20 transition-opacity duration-300 ${
                   active ? "opacity-100" : "opacity-0"

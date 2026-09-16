@@ -12,15 +12,15 @@ export default function Hero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=2200&q=80"
+          src="/repairs/hero.jpg"
           alt=""
           fill
           priority
-          className="object-cover opacity-40"
+          className="object-cover opacity-80"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/20" />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-5 py-24 sm:px-8">
