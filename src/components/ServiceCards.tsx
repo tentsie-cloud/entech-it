@@ -33,7 +33,7 @@ export default function ServiceCards() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               aria-pressed={active}
-              className={`group relative aspect-[4/3] overflow-hidden rounded-2xl text-left outline-none transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+              className={`group relative aspect-square overflow-hidden rounded-2xl text-left outline-none transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                 active
                   ? "ring-2 ring-accent ring-offset-2 ring-offset-background"
                   : "ring-1 ring-border hover:ring-border-strong"
