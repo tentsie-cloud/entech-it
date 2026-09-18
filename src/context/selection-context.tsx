@@ -10,8 +10,14 @@ type SelectionContextValue = {
 
 const SelectionContext = createContext<SelectionContextValue | null>(null);
 
-export function SelectionProvider({ children }: { children: ReactNode }) {
-  const [selectedId, setSelectedId] = useState(services[0].id);
+export function SelectionProvider({
+  children,
+  initialId = services[0].id,
+}: {
+  children: ReactNode;
+  initialId?: string;
+}) {
+  const [selectedId, setSelectedId] = useState(initialId);
   const value = useMemo(() => ({ selectedId, setSelectedId }), [selectedId]);
   return (
     <SelectionContext.Provider value={value}>
