@@ -5,11 +5,24 @@ import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import BeforeAfter from "@/components/BeforeAfter";
 import { SelectionProvider } from "@/context/selection-context";
+import { JsonLd, faqSchema, serviceSchema } from "@/components/JsonLd";
+
+const PAGE_PATH = "/repairs/ps5";
+const PAGE_TITLE = "PS5 Repair — HDMI Port Replacement & Liquid Metal";
+const PAGE_DESCRIPTION =
+  "Board-level PS5 repair: HDMI port replacement from £70 and liquid metal reapplication for overheating consoles. Free diagnostic, fixed quote before any work.";
 
 export const metadata: Metadata = {
-  title: "PS5 Repair — HDMI Port Replacement & Liquid Metal | ENTECH IT",
-  description:
-    "Board-level PS5 repair: HDMI port replacement from £70 and liquid metal reapplication for overheating consoles. Free diagnostic, fixed quote before any work.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: { canonical: PAGE_PATH },
+  openGraph: {
+    type: "article",
+    url: PAGE_PATH,
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/repairs/liquid-metal-after.jpg", width: 1200, height: 1200, alt: "PS5 APU with liquid metal reapplied" }],
+  },
 };
 
 const symptoms = {
@@ -68,6 +81,15 @@ const faqs = [
 export default function Ps5RepairPage() {
   return (
     <SelectionProvider initialId="ps5-hdmi">
+      <JsonLd
+        schema={serviceSchema({
+          name: "PS5 HDMI & Liquid Metal Repair",
+          description: PAGE_DESCRIPTION,
+          path: PAGE_PATH,
+          priceRange: "£70-£90",
+        })}
+      />
+      <JsonLd schema={faqSchema(faqs)} />
       <Nav />
       <main className="flex-1">
         {/* Hero */}

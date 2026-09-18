@@ -53,13 +53,15 @@ export default function ServiceCards() {
               ) : service.image ? (
                 <Image
                   src={service.image}
-                  alt=""
+                  alt={`${service.name} at ENTECH IT — ${service.tagline}`}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-surface-raised via-surface to-background" />
+                // Card labels always sit on a dark scrim, so the fallback
+                // plate stays dark in both themes.
+                <div className="absolute inset-0 bg-gradient-to-br from-[#222733] via-[#171a21] to-[#0e1015]" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/15 transition-opacity" />
               <div
@@ -73,7 +75,7 @@ export default function ServiceCards() {
                   {service.name}
                 </h3>
                 <p className="mt-1 text-sm text-white/70">{service.tagline}</p>
-                <p className="mt-3 text-sm font-semibold text-accent-strong">
+                <p className="mt-3 text-sm font-semibold text-[#8fb6ff]">
                   {service.priceLabel}
                 </p>
               </div>

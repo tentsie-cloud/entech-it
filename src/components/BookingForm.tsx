@@ -164,8 +164,9 @@ export default function BookingForm() {
   );
 }
 
+// text-base keeps inputs at 16px, which also stops iOS zooming on focus.
 const inputClass =
-  "w-full rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent focus:ring-1 focus:ring-accent";
+  "w-full rounded-xl border border-border bg-surface-raised px-4 py-3 text-base text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent";
 
 function Field({
   label,

@@ -6,10 +6,12 @@ import BookingForm from "@/components/BookingForm";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
 import { SelectionProvider } from "@/context/selection-context";
+import { JsonLd, localBusinessSchema } from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <SelectionProvider>
+      <JsonLd schema={localBusinessSchema} />
       <Nav />
       <main className="flex-1">
         <Hero />
