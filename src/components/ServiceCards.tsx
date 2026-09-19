@@ -3,11 +3,9 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, HardDrive, Laptop, Thermometer, type LucideIcon } from "lucide-react";
-import { services, type Service } from "@/data/services";
+import { services } from "@/data/services";
 import { useSelection } from "@/context/selection-context";
 
-// Services without real photography yet sit in a compact, icon-led tier
-// instead of pretending to be equal-weight photo tiles.
 const fallbackIcon: Record<string, LucideIcon> = {
   macbook: Laptop,
   laptop: Cpu,
@@ -18,14 +16,13 @@ const fallbackIcon: Record<string, LucideIcon> = {
 export default function ServiceCards() {
   const { selectedId, setSelectedId } = useSelection();
   const reduceMotion = useReducedMotion();
-  const offsetY = reduceMotion ? 0 : 16;
 
   const featured = services.filter((s) => s.image);
   const compact = services.filter((s) => !s.image);
 
   return (
-    <section id="services" className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-      <div className="mb-12 max-w-xl">
+    <section id="services" className="py-24">
+      <div className="mx-auto mb-12 max-w-xl px-5 sm:px-8">
         <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Most common repairs
         </h2>
@@ -34,144 +31,121 @@ export default function ServiceCards() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[190px]">
+      <div>
         {featured.map((service, i) => {
           const active = service.id === selectedId;
-          const isHero = i === 0;
+          const reversed = i % 2 === 1;
           return (
             <motion.button
               key={service.id}
               type="button"
               onClick={() => setSelectedId(service.id)}
-              initial={{ opacity: 0, y: offsetY }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               aria-pressed={active}
-              className={`group relative overflow-hidden rounded-2xl text-left outline-none transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                isHero
-                  ? "aspect-[4/3] sm:col-span-2 sm:aspect-video lg:col-span-2 lg:row-span-2 lg:aspect-auto"
-                  : "aspect-square lg:col-span-2 lg:aspect-auto"
-              } ${
-                active
-                  ? "ring-2 ring-accent ring-offset-2 ring-offset-background"
-                  : "ring-1 ring-border hover:ring-border-strong"
+              className={`group grid w-full grid-cols-1 items-stretch text-left outline-none lg:grid-cols-2 ${
+                active ? "bg-accent/[0.06]" : ""
               }`}
             >
-              {service.video && !reduceMotion ? (
-                <video
-                  src={service.video}
-                  poster={service.image}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <Image
-                  src={service.image!}
-                  alt={`${service.name} at ENTECH IT, ${service.tagline}`}
-                  fill
-                  sizes={
-                    isHero
-                      ? "(min-width: 1024px) 50vw, 100vw"
-                      : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  }
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/15 transition-opacity" />
               <div
-                className={`absolute inset-0 bg-accent/20 transition-opacity duration-300 ${
-                  active ? "opacity-100" : "opacity-0"
+                className={`relative aspect-[4/3] overflow-hidden lg:aspect-auto ${
+                  reversed ? "lg:order-2" : ""
                 }`}
-              />
-
-              <div className="relative flex h-full flex-col justify-end p-5">
-                <h3
-                  className={`font-display font-bold text-white ${isHero ? "text-2xl" : "text-xl"}`}
+              >
+                <motion.div
+                  initial={reduceMotion ? false : { scale: 1.15, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0"
                 >
-                  {service.name}
-                </h3>
-                <p className="mt-1 text-sm text-white/70">{service.tagline}</p>
-                <p className="mt-3 text-sm font-semibold text-[#8fb6ff]">
-                  {service.priceLabel}
-                </p>
+                  {service.video && !reduceMotion ? (
+                    <video
+                      src={service.video}
+                      poster={service.image}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      aria-hidden="true"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <Image
+                      src={service.image!}
+                      alt={`${service.name} at ENTECH IT, ${service.tagline}`}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  )}
+                </motion.div>
+                {active && (
+                  <div className="absolute inset-0 ring-4 ring-inset ring-accent" />
+                )}
+              </div>
+
+              <div
+                className={`flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-16 ${
+                  reversed ? "lg:order-1" : ""
+                }`}
+              >
+                <motion.div
+                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <h3 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
+                    {service.name}
+                  </h3>
+                  <p className="mt-3 max-w-sm text-muted">{service.tagline}</p>
+                  <p className="mt-5 font-display text-2xl font-bold text-accent-strong">
+                    {service.priceLabel}
+                  </p>
+                  <span
+                    className={`mt-6 inline-flex w-fit items-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
+                      active
+                        ? "bg-accent-button text-white"
+                        : "bg-surface-raised text-foreground group-hover:bg-accent-button group-hover:text-white"
+                    }`}
+                  >
+                    {active ? "Selected" : "Select this repair"}
+                  </span>
+                </motion.div>
               </div>
             </motion.button>
           );
         })}
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {compact.map((service, i) => {
-          const active = service.id === selectedId;
-          const Icon = fallbackIcon[service.id];
-          return (
-            <CompactCard
-              key={service.id}
-              service={service}
-              active={active}
-              Icon={Icon}
-              delay={featured.length * 0.05 + i * 0.05}
-              offsetY={offsetY}
-              onSelect={() => setSelectedId(service.id)}
-            />
-          );
-        })}
+      <div className="mx-auto mt-4 max-w-7xl px-5 sm:px-8">
+        <div className="flex flex-wrap gap-3 border-t border-border pt-8">
+          {compact.map((service, i) => {
+            const active = service.id === selectedId;
+            const Icon = fallbackIcon[service.id];
+            return (
+              <motion.button
+                key={service.id}
+                type="button"
+                onClick={() => setSelectedId(service.id)}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                aria-pressed={active}
+                className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2.5 text-sm transition-colors ${
+                  active
+                    ? "border-accent bg-accent/10 text-accent-strong"
+                    : "border-border text-muted hover:border-border-strong hover:text-foreground"
+                }`}
+              >
+                <Icon size={16} />
+                <span className="font-semibold text-foreground">{service.name}</span>
+                <span>{service.priceLabel}</span>
+              </motion.button>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function CompactCard({
-  service,
-  active,
-  Icon,
-  delay,
-  offsetY,
-  onSelect,
-}: {
-  service: Service;
-  active: boolean;
-  Icon: LucideIcon;
-  delay: number;
-  offsetY: number;
-  onSelect: () => void;
-}) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onSelect}
-      initial={{ opacity: 0, y: offsetY }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      aria-pressed={active}
-      className={`group flex items-center gap-4 rounded-2xl border p-5 text-left transition-colors duration-300 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-        active
-          ? "border-accent bg-accent/10"
-          : "border-border bg-surface hover:border-border-strong"
-      }`}
-    >
-      <span
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors ${
-          active ? "bg-accent text-white" : "bg-surface-raised text-accent"
-        }`}
-      >
-        <Icon size={20} />
-      </span>
-      <span className="min-w-0">
-        <span className="block font-display font-bold text-foreground">
-          {service.name}
-        </span>
-        <span className="block text-sm text-muted">{service.tagline}</span>
-        <span className="mt-1 block text-sm font-semibold text-accent-strong">
-          {service.priceLabel}
-        </span>
-      </span>
-    </motion.button>
   );
 }
