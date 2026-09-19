@@ -40,10 +40,20 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
     const res = await fetch(url.toString(), {
       next: { revalidate: 3600 },
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error(`[google-reviews] HTTP ${res.status} from Places API`);
+      return null;
+    }
 
     const data = await res.json();
-    if (data.status !== "OK" || !data.result) return null;
+    if (data.status !== "OK" || !data.result) {
+      console.error(
+        `[google-reviews] Places API status: ${data.status}${
+          data.error_message ? `, message: ${data.error_message}` : ""
+        }`
+      );
+      return null;
+    }
 
     const result = data.result as {
       rating?: number;
@@ -59,7 +69,12 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
       }>;
     };
 
-    if (typeof result.rating !== "number") return null;
+    if (typeof result.rating !== "number") {
+      console.error(
+        "[google-reviews] Places API returned OK but no rating field. This Place ID likely has no reviews yet."
+      );
+      return null;
+    }
 
     return {
       rating: result.rating,
@@ -74,7 +89,8 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
         time: r.time,
       })),
     };
-  } catch {
+  } catch (error) {
+    console.error("[google-reviews] Fetch threw:", error);
     return null;
   }
 }
