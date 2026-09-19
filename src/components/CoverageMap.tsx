@@ -8,7 +8,7 @@ import { useSelection } from "@/context/selection-context";
 const byName = new Map(coverageAreas.map((a) => [a.name, a]));
 const point = (name: string) => byName.get(name)!;
 
-// Decorative route lines — schematic, not surveyed. Follows the real Lea
+// Decorative route lines, schematic, not surveyed. Follows the real Lea
 // Valley corridor north (Hertford) to south (Tottenham), with Essex and the
 // Enfield-border towns branching off it.
 const spine = [
@@ -69,49 +69,51 @@ export default function CoverageMap() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="rounded-3xl border border-border bg-surface p-6 sm:p-10"
       >
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
-          <div>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-xl">
             <p className="font-display text-sm font-semibold text-accent-strong">
               Where we cover
             </p>
             <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Mobile repairs across Herts, Essex &amp; North London
             </h2>
-            <p className="mt-3 max-w-md text-muted">
-              We come to you — pick your area and we&apos;ll carry it
+            <p className="mt-3 text-muted">
+              We come to you. Pick your area and we&apos;ll carry it
               straight into your booking.
             </p>
-
-            <div className="mt-5 flex items-center gap-2 text-sm text-muted">
-              <MapPin size={15} className="text-accent" />
-              Based in Hoddesdon / Waltham Cross
-            </div>
-
-            <AnimatePresence mode="popLayout">
-              {selectedArea ? (
-                <motion.div
-                  key={selectedArea}
-                  initial={{ opacity: 0, transform: "translateY(8px)" }}
-                  animate={{ opacity: 1, transform: "translateY(0px)" }}
-                  exit={{ opacity: 0, transform: "translateY(-8px)" }}
-                  transition={{ type: "spring", bounce: 0, duration: 0.35 }}
-                  className="mt-6 flex flex-wrap items-center gap-3 rounded-xl bg-surface-raised px-4 py-3"
-                >
-                  <p className="text-sm text-foreground">
-                    <strong>{selectedArea}</strong> selected
-                  </p>
-                  <a
-                    href="#book"
-                    className="ml-auto text-sm font-semibold text-accent-strong hover:underline"
-                  >
-                    Continue to booking →
-                  </a>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
           </div>
 
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
+          <div className="flex items-center gap-2 text-sm text-muted">
+            <MapPin size={15} className="text-accent" />
+            Based in Hoddesdon / Waltham Cross
+          </div>
+        </div>
+
+        <AnimatePresence mode="popLayout">
+          {selectedArea ? (
+            <motion.div
+              key={selectedArea}
+              initial={{ opacity: 0, transform: "translateY(8px)" }}
+              animate={{ opacity: 1, transform: "translateY(0px)" }}
+              exit={{ opacity: 0, transform: "translateY(-8px)" }}
+              transition={{ type: "spring", bounce: 0, duration: 0.35 }}
+              className="mt-6 flex flex-wrap items-center gap-3 rounded-xl bg-surface-raised px-4 py-3"
+            >
+              <p className="text-sm text-foreground">
+                <strong>{selectedArea}</strong> selected
+              </p>
+              <a
+                href="#book"
+                className="ml-auto text-sm font-semibold text-accent-strong hover:underline"
+              >
+                Continue to booking
+              </a>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+
+        <div className="mt-10 flex justify-center">
+          <div className="relative aspect-[4/5] w-full max-w-md">
             <svg
               viewBox="0 0 100 108"
               preserveAspectRatio="xMidYMid meet"

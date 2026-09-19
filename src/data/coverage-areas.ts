@@ -3,7 +3,7 @@ export type CoverageGroup = "herts" | "essex" | "london";
 export type CoverageArea = {
   name: string;
   group: CoverageGroup;
-  /** Percent position on the schematic corridor diagram — topological, not to scale. */
+  /** Percent position on the schematic corridor diagram, topological, not to scale. */
   x: number;
   y: number;
   /** Where the mobile team is based. */
