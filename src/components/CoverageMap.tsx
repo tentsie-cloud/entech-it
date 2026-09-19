@@ -189,7 +189,7 @@ export default function CoverageMap() {
                   transition={{ duration: 0.4, delay: reduceMotion ? 0 : i * 0.02 }}
                   aria-label={`Book a repair in ${area.name}`}
                   aria-pressed={active}
-                  className="group absolute -translate-x-1/2 -translate-y-1/2 p-2.5 outline-none"
+                  className="group absolute -translate-x-1/2 -translate-y-1/2 p-2.5 outline-hidden focus-visible:[--tw-outline-style:solid] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus-visible:rounded-full"
                   style={{ left: `${area.x}%`, top: `${area.y}%` }}
                 >
                   <span className="relative flex items-center justify-center">

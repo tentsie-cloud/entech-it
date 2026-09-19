@@ -28,12 +28,20 @@ export default function Nav() {
         >
           ENTECH<span className="text-accent">IT</span>
         </Link>
-        <a
-          href="#book"
-          className="rounded-full bg-accent-button px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-button-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Book a Repair
-        </a>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/services"
+            className="hidden text-sm font-medium text-muted transition-colors hover:text-foreground sm:inline-block"
+          >
+            Services &amp; pricing
+          </Link>
+          <a
+            href="#book"
+            className="rounded-full bg-accent-button px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-button-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Book a Repair
+          </a>
+        </div>
       </div>
     </header>
   );

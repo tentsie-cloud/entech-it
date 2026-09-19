@@ -2,16 +2,9 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { Cpu, HardDrive, Laptop, Thermometer, type LucideIcon } from "lucide-react";
 import { services } from "@/data/services";
+import { fallbackIcon } from "@/data/service-icons";
 import { useSelection } from "@/context/selection-context";
-
-const fallbackIcon: Record<string, LucideIcon> = {
-  macbook: Laptop,
-  laptop: Cpu,
-  "data-recovery": HardDrive,
-  "ps5-overheating": Thermometer,
-};
 
 export default function ServiceCards() {
   const { selectedId, setSelectedId } = useSelection();
@@ -41,7 +34,7 @@ export default function ServiceCards() {
               type="button"
               onClick={() => setSelectedId(service.id)}
               aria-pressed={active}
-              className={`group grid w-full grid-cols-1 items-stretch text-left outline-none lg:grid-cols-2 ${
+              className={`group grid w-full grid-cols-1 items-stretch text-left outline-hidden focus-visible:[--tw-outline-style:solid] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:grid-cols-2 ${
                 active ? "bg-accent/[0.06]" : ""
               }`}
             >
