@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[92svh] items-center overflow-hidden pt-16"
+      className="relative flex min-h-[68svh] items-center overflow-hidden pt-16 sm:min-h-[72svh]"
     >
       <div className="absolute inset-0">
         <Image
