@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Clock, ShieldCheck } from "lucide-react";
 import { services } from "@/data/services";
 import { useSelection } from "@/context/selection-context";
@@ -8,6 +8,9 @@ import { useSelection } from "@/context/selection-context";
 export default function EstimatePanel() {
   const { selectedId, setSelectedId } = useSelection();
   const service = services.find((s) => s.id === selectedId) ?? services[0];
+  const reduceMotion = useReducedMotion();
+  const offsetY = reduceMotion ? 0 : 8;
+  const restScale = reduceMotion ? 1 : 0.96;
 
   return (
     <section id="estimate" className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
@@ -18,12 +21,12 @@ export default function EstimatePanel() {
               Instant estimate
             </p>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, transform: `translateY(${offsetY}px)` }}
+                animate={{ opacity: 1, transform: "translateY(0px)" }}
+                exit={{ opacity: 0, transform: `translateY(${-offsetY}px)` }}
                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h3 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
@@ -69,12 +72,12 @@ export default function EstimatePanel() {
           </div>
 
           <div className="flex flex-col items-start gap-4 lg:items-end lg:text-right">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               <motion.p
                 key={service.id}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, transform: `scale(${restScale})` }}
+                animate={{ opacity: 1, transform: "scale(1)" }}
+                exit={{ opacity: 0, transform: `scale(${restScale})` }}
                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-4xl font-extrabold text-foreground sm:text-5xl"
               >
