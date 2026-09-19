@@ -113,7 +113,27 @@ export default function CoverageMap() {
         </AnimatePresence>
 
         <div className="mt-10 flex justify-center">
-          <div className="relative aspect-[4/5] w-full max-w-md">
+          <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-[inset_0_1px_0_var(--border-strong)]">
+            <div
+              className="absolute inset-0 opacity-60"
+              style={{
+                backgroundImage: "radial-gradient(var(--border) 1px, transparent 1px)",
+                backgroundSize: "16px 16px",
+              }}
+              aria-hidden="true"
+            />
+
+            {coverageAreas
+              .filter((a) => a.isBase)
+              .map((area) => (
+                <div
+                  key={area.name}
+                  className="pointer-events-none absolute h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-2xl"
+                  style={{ left: `${area.x}%`, top: `${area.y}%` }}
+                  aria-hidden="true"
+                />
+              ))}
+
             <svg
               viewBox="0 0 100 108"
               preserveAspectRatio="xMidYMid meet"
@@ -123,29 +143,35 @@ export default function CoverageMap() {
               <path
                 d={pathFor(spine)}
                 fill="none"
-                stroke="var(--border-strong)"
-                strokeWidth="0.6"
+                stroke="var(--accent)"
+                strokeOpacity={0.55}
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d={pathFor(essexBranch)}
                 fill="none"
                 stroke="var(--border-strong)"
-                strokeWidth="0.6"
-                strokeDasharray="1.5 1.5"
+                strokeWidth="0.7"
+                strokeLinecap="round"
+                strokeDasharray="1.5 2"
               />
               <path
                 d={pathFor(westBranch)}
                 fill="none"
                 stroke="var(--border-strong)"
-                strokeWidth="0.6"
-                strokeDasharray="1.5 1.5"
+                strokeWidth="0.7"
+                strokeLinecap="round"
+                strokeDasharray="1.5 2"
               />
               <path
                 d={pathFor(crewsHillSpur)}
                 fill="none"
                 stroke="var(--border-strong)"
-                strokeWidth="0.6"
-                strokeDasharray="1.5 1.5"
+                strokeWidth="0.7"
+                strokeLinecap="round"
+                strokeDasharray="1.5 2"
               />
             </svg>
 
@@ -171,7 +197,7 @@ export default function CoverageMap() {
                       <span className="motion-safe:absolute motion-safe:h-4 motion-safe:w-4 motion-safe:animate-ping motion-safe:rounded-full motion-safe:bg-accent/50" />
                     )}
                     <span
-                      className={`relative block rounded-full border-2 transition-all duration-150 group-hover:scale-125 group-focus-visible:scale-125 group-active:scale-95 ${
+                      className={`relative block rounded-full border-2 shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-150 group-hover:scale-125 group-focus-visible:scale-125 group-active:scale-95 ${
                         active
                           ? "h-3.5 w-3.5 border-accent bg-accent"
                           : area.isBase
