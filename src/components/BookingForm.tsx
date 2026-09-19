@@ -3,12 +3,13 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { services } from "@/data/services";
+import { coverageAreas } from "@/data/coverage-areas";
 import { useSelection } from "@/context/selection-context";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function BookingForm() {
-  const { selectedId, setSelectedId } = useSelection();
+  const { selectedId, setSelectedId, selectedArea, setSelectedArea } = useSelection();
   const [status, setStatus] = useState<Status>("idle");
   const reduceMotion = useReducedMotion();
   const offsetY = reduceMotion ? 0 : 16;
@@ -36,6 +37,7 @@ export default function BookingForm() {
       setStatus("success");
       form.reset();
       setSelectedId(services[0].id);
+      setSelectedArea("");
     } catch {
       setStatus("error");
     }
@@ -122,6 +124,27 @@ export default function BookingForm() {
                 required
                 className={inputClass}
               />
+            </Field>
+
+            <Field label="Your area" htmlFor="area" className="sm:col-span-2">
+              <select
+                id="area"
+                name="area"
+                required
+                value={selectedArea}
+                onChange={(e) => setSelectedArea(e.target.value)}
+                className={inputClass}
+              >
+                <option value="" disabled>
+                  Select your area
+                </option>
+                {coverageAreas.map((a) => (
+                  <option key={a.name} value={a.name}>
+                    {a.name}
+                  </option>
+                ))}
+                <option value="other">Other / just outside these areas</option>
+              </select>
             </Field>
 
             <Field

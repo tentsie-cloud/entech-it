@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ServiceCards from "@/components/ServiceCards";
 import EstimatePanel from "@/components/EstimatePanel";
+import CoverageMap from "@/components/CoverageMap";
 import BookingForm from "@/components/BookingForm";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <ServiceCards />
         <EstimatePanel />
+        <CoverageMap />
         <BookingForm />
         <Reviews />
       </main>

@@ -11,11 +11,18 @@ type EnquiryPayload = {
   device?: string;
   fault?: string;
   date?: string;
+  area?: string;
 };
 
 function isValid(payload: EnquiryPayload) {
   return Boolean(
-    payload.name && payload.phone && payload.email && payload.device && payload.fault && payload.date
+    payload.name &&
+      payload.phone &&
+      payload.email &&
+      payload.device &&
+      payload.fault &&
+      payload.date &&
+      payload.area
   );
 }
 
@@ -35,6 +42,7 @@ export async function POST(request: Request) {
     <p><strong>Phone:</strong> ${escapeHtml(payload.phone!)}</p>
     <p><strong>Email:</strong> ${escapeHtml(payload.email!)}</p>
     <p><strong>Device:</strong> ${escapeHtml(deviceLabel!)}</p>
+    <p><strong>Area:</strong> ${escapeHtml(payload.area!)}</p>
     <p><strong>Preferred date:</strong> ${escapeHtml(payload.date!)}</p>
     <p><strong>Fault description:</strong><br/>${escapeHtml(payload.fault!)}</p>
   `;

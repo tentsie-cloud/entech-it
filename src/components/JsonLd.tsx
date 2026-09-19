@@ -1,4 +1,5 @@
 import { absoluteUrl, site } from "@/lib/site";
+import { coverageAreas } from "@/data/coverage-areas";
 
 export function JsonLd({ schema }: { schema: object }) {
   return (
@@ -32,6 +33,10 @@ export const localBusinessSchema = {
     dayOfWeek: slot.days,
     opens: slot.opens,
     closes: slot.closes,
+  })),
+  areaServed: coverageAreas.map((area) => ({
+    "@type": "Place",
+    name: area.name,
   })),
   aggregateRating: {
     "@type": "AggregateRating",

@@ -6,6 +6,8 @@ import { services } from "@/data/services";
 type SelectionContextValue = {
   selectedId: string;
   setSelectedId: (id: string) => void;
+  selectedArea: string;
+  setSelectedArea: (area: string) => void;
 };
 
 const SelectionContext = createContext<SelectionContextValue | null>(null);
@@ -18,7 +20,11 @@ export function SelectionProvider({
   initialId?: string;
 }) {
   const [selectedId, setSelectedId] = useState(initialId);
-  const value = useMemo(() => ({ selectedId, setSelectedId }), [selectedId]);
+  const [selectedArea, setSelectedArea] = useState("");
+  const value = useMemo(
+    () => ({ selectedId, setSelectedId, selectedArea, setSelectedArea }),
+    [selectedId, selectedArea]
+  );
   return (
     <SelectionContext.Provider value={value}>
       {children}
