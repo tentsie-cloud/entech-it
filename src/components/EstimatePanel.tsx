@@ -17,7 +17,7 @@ export default function EstimatePanel() {
       <div className="rounded-3xl border border-border bg-surface p-6 sm:p-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="text-sm font-medium uppercase tracking-wide text-accent-strong">
+            <p className="font-display text-sm font-semibold text-accent-strong">
               Instant estimate
             </p>
 

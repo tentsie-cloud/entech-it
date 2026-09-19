@@ -42,7 +42,7 @@ export default function Reviews() {
               “{review.quote}”
             </blockquote>
             <figcaption className="mt-4 text-xs text-muted">
-              {review.name} · {review.device}
+              {review.name} ({review.device})
             </figcaption>
           </motion.figure>
         ))}

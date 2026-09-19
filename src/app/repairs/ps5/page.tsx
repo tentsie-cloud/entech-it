@@ -108,7 +108,7 @@ export default function Ps5RepairPage() {
           </div>
 
           <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-            <p className="text-sm font-medium uppercase tracking-wide text-accent-strong">
+            <p className="font-display text-sm font-semibold text-accent-strong">
               PlayStation 5
             </p>
             <h1 className="mt-3 max-w-2xl text-balance font-display text-4xl font-extrabold leading-[1.06] tracking-tight sm:text-6xl">
@@ -146,7 +146,7 @@ export default function Ps5RepairPage() {
               <h3 className="font-display text-xl font-bold">
                 HDMI &amp; no-signal faults
               </h3>
-              <p className="mt-2 text-sm text-accent-strong">£70–90 · 24–48 hours</p>
+              <p className="mt-2 text-sm text-accent-strong">£70–90, ready in 24–48 hours</p>
               <ul className="mt-5 space-y-2.5 text-muted">
                 {symptoms.hdmi.map((item) => (
                   <li key={item} className="flex gap-3">
@@ -161,7 +161,7 @@ export default function Ps5RepairPage() {
               <h3 className="font-display text-xl font-bold">
                 Overheating &amp; thermal faults
               </h3>
-              <p className="mt-2 text-sm text-accent-strong">From £80 · same week</p>
+              <p className="mt-2 text-sm text-accent-strong">From £80, ready the same week</p>
               <ul className="mt-5 space-y-2.5 text-muted">
                 {symptoms.thermal.map((item) => (
                   <li key={item} className="flex gap-3">

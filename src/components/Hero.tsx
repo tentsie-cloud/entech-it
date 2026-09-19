@@ -35,7 +35,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 text-lg text-muted sm:text-xl">
-            Gaming PCs&nbsp;•&nbsp;MacBooks&nbsp;•&nbsp;PS5 HDMI&nbsp;•&nbsp;Microsoldering
+            Gaming PCs, MacBooks, PS5 HDMI and microsoldering
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-5">
