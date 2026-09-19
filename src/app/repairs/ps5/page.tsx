@@ -8,9 +8,9 @@ import { SelectionProvider } from "@/context/selection-context";
 import { JsonLd, faqSchema, serviceSchema } from "@/components/JsonLd";
 
 const PAGE_PATH = "/repairs/ps5";
-const PAGE_TITLE = "PS5 Repair — HDMI Port Replacement & Liquid Metal";
+const PAGE_TITLE = "PS5 Repair: HDMI Port Replacement & Liquid Metal";
 const PAGE_DESCRIPTION =
-  "Board-level PS5 repair: HDMI port replacement from £70 and liquid metal reapplication for overheating consoles. Free diagnostic, fixed quote before any work.";
+  "Board-level PS5 repair: HDMI port replacement from £110 and liquid metal reapplication for overheating consoles from £65. Free diagnostic, fixed quote before any work.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -62,7 +62,7 @@ const steps = [
 const faqs = [
   {
     q: "Will I lose my games or save data?",
-    a: "No. Storage isn't touched during either repair — your console comes back exactly as you left it.",
+    a: "No. Storage isn't touched during either repair, your console comes back exactly as you left it.",
   },
   {
     q: "Is liquid metal better than thermal paste?",
@@ -70,11 +70,11 @@ const faqs = [
   },
   {
     q: "My console was opened by someone else. Can you still help?",
-    a: "Usually. Bring it in and we'll assess it — previous attempts don't automatically rule out a repair.",
+    a: "Usually. Bring it in and we'll assess it, previous attempts don't automatically rule out a repair.",
   },
   {
     q: "How long does it take?",
-    a: "HDMI port replacement is typically 24–48 hours. Liquid metal work is usually same week, depending on parts and workload.",
+    a: "HDMI port replacement takes 48 hours as standard, or 24 hours with our rush service. Overheating repairs (internal clean or liquid metal) are usually same-day, depending on your drop-off time.",
   },
 ];
 
@@ -83,10 +83,18 @@ export default function Ps5RepairPage() {
     <SelectionProvider initialId="ps5-hdmi">
       <JsonLd
         schema={serviceSchema({
-          name: "PS5 HDMI & Liquid Metal Repair",
-          description: PAGE_DESCRIPTION,
+          name: "PS5 HDMI Repair",
+          description: "PS5 HDMI port replacement for no-display and no-signal faults.",
           path: PAGE_PATH,
-          priceRange: "£70-£90",
+          priceRange: "£110-£130",
+        })}
+      />
+      <JsonLd
+        schema={serviceSchema({
+          name: "PS5 Overheating Repair",
+          description: "PS5 internal deep clean or liquid metal repad for overheating and thermal shutdown faults.",
+          path: PAGE_PATH,
+          priceRange: "£65-£120",
         })}
       />
       <JsonLd schema={faqSchema(faqs)} />
@@ -115,7 +123,7 @@ export default function Ps5RepairPage() {
               PS5 HDMI &amp; Liquid Metal Repair
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted">
-              Board-level work done under a microscope — no signal, damaged
+              Board-level work done under a microscope. No signal, damaged
               ports and overheating consoles fixed properly.
             </p>
 
@@ -127,10 +135,10 @@ export default function Ps5RepairPage() {
                 Book a Repair
               </a>
               <span className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted">
-                HDMI port <strong className="text-foreground">£70–90</strong>
+                HDMI port <strong className="text-foreground">From £110</strong>
               </span>
               <span className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted">
-                Liquid metal <strong className="text-foreground">From £80</strong>
+                Overheating <strong className="text-foreground">From £65</strong>
               </span>
             </div>
           </div>
@@ -146,7 +154,9 @@ export default function Ps5RepairPage() {
               <h3 className="font-display text-xl font-bold">
                 HDMI &amp; no-signal faults
               </h3>
-              <p className="mt-2 text-sm text-accent-strong">£70–90, ready in 24–48 hours</p>
+              <p className="mt-2 text-sm text-accent-strong">
+                £110 (48hrs) or £130 for next-day rush
+              </p>
               <ul className="mt-5 space-y-2.5 text-muted">
                 {symptoms.hdmi.map((item) => (
                   <li key={item} className="flex gap-3">
@@ -161,7 +171,10 @@ export default function Ps5RepairPage() {
               <h3 className="font-display text-xl font-bold">
                 Overheating &amp; thermal faults
               </h3>
-              <p className="mt-2 text-sm text-accent-strong">From £80, ready the same week</p>
+              <p className="mt-2 text-sm text-accent-strong">
+                £65 internal clean, or £120 liquid metal (most popular).
+                Usually same-day.
+              </p>
               <ul className="mt-5 space-y-2.5 text-muted">
                 {symptoms.thermal.map((item) => (
                   <li key={item} className="flex gap-3">

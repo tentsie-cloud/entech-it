@@ -25,11 +25,20 @@ export const services: Service[] = [
   {
     id: "ps5-hdmi",
     name: "PS5 HDMI Repair",
-    tagline: "Port replacement, no-signal fixes",
+    tagline: "Port replacement for no-display faults",
     image: "/repairs/ps5-hdmi.jpg",
-    priceLabel: "£70–90",
-    priceNote: "Fixed price — HDMI port replaced and tested.",
+    priceLabel: "From £110",
+    priceNote: "£110 with 48-hour turnaround, or £130 for next-day rush.",
     turnaround: "24–48 hours",
+  },
+  {
+    id: "ps5-overheating",
+    name: "PS5 Overheating Repair",
+    tagline: "Liquid metal repad & internal clean",
+    priceLabel: "From £65",
+    priceNote:
+      "£65 internal clean, or £120 for our most popular liquid metal repad (clean included).",
+    turnaround: "Usually same-day",
   },
   {
     id: "microsoldering",
@@ -61,7 +70,7 @@ export const services: Service[] = [
     name: "Data Recovery",
     tagline: "HDD, SSD & failed drive recovery",
     priceLabel: "From £120",
-    priceNote: "No data, no fee — assessment included.",
+    priceNote: "No data, no fee. Assessment included.",
     turnaround: "2–7 working days",
   },
 ];

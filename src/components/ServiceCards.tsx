@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { Cpu, HardDrive, Laptop, type LucideIcon } from "lucide-react";
+import { Cpu, HardDrive, Laptop, Thermometer, type LucideIcon } from "lucide-react";
 import { services, type Service } from "@/data/services";
 import { useSelection } from "@/context/selection-context";
 
@@ -12,6 +12,7 @@ const fallbackIcon: Record<string, LucideIcon> = {
   macbook: Laptop,
   laptop: Cpu,
   "data-recovery": HardDrive,
+  "ps5-overheating": Thermometer,
 };
 
 export default function ServiceCards() {
@@ -104,7 +105,7 @@ export default function ServiceCards() {
         })}
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {compact.map((service, i) => {
           const active = service.id === selectedId;
           const Icon = fallbackIcon[service.id];
