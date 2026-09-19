@@ -8,19 +8,25 @@ import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
 import { SelectionProvider } from "@/context/selection-context";
 import { JsonLd, localBusinessSchema } from "@/components/JsonLd";
+import { getGoogleReviews } from "@/lib/google-reviews";
 
-export default function Home() {
+export default async function Home() {
+  const reviewsData = await getGoogleReviews();
+  const rating = reviewsData
+    ? { value: reviewsData.rating, count: reviewsData.reviewCount }
+    : null;
+
   return (
     <SelectionProvider>
-      <JsonLd schema={localBusinessSchema} />
+      <JsonLd schema={localBusinessSchema(rating)} />
       <Nav />
       <main className="flex-1">
-        <Hero />
+        <Hero rating={rating?.value ?? null} reviewCount={rating?.count ?? null} />
         <ServiceCards />
         <EstimatePanel />
         <CoverageMap />
         <BookingForm />
-        <Reviews />
+        <Reviews data={reviewsData} />
       </main>
       <Footer />
     </SelectionProvider>

@@ -4,7 +4,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({
+  rating,
+  reviewCount,
+}: {
+  rating: number | null;
+  reviewCount: number | null;
+}) {
   const reduceMotion = useReducedMotion();
   const offsetY = reduceMotion ? 0 : 18;
 
@@ -49,21 +55,27 @@ export default function Hero() {
               Book a Repair
             </a>
 
-            <div className="flex items-center gap-2.5 text-sm text-muted">
-              <div className="flex items-center gap-1" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className="fill-accent text-accent"
-                  />
-                ))}
+            {rating !== null && (
+              <div className="flex items-center gap-2.5 text-sm text-muted">
+                <div className="flex items-center gap-1" aria-hidden="true">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={16}
+                      className={
+                        i < Math.round(rating)
+                          ? "fill-accent text-accent"
+                          : "text-border-strong"
+                      }
+                    />
+                  ))}
+                </div>
+                <span>
+                  <strong className="text-foreground">{rating.toFixed(1)}</strong>{" "}
+                  on Google{reviewCount ? ` · ${reviewCount} reviews` : ""}
+                </span>
               </div>
-              <span>
-                <strong className="text-foreground">4.9</strong> on Google ·
-                300+ reviews
-              </span>
-            </div>
+            )}
           </div>
         </motion.div>
       </div>

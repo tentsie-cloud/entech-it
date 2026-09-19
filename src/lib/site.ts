@@ -29,8 +29,6 @@ export const site = {
     { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:00" },
     { days: ["Saturday"], opens: "10:00", closes: "16:00" },
   ],
-
-  rating: { value: 4.9, count: 300 }, // PLACEHOLDER — real Google figures
 } as const;
 
 export const absoluteUrl = (path = "/") => new URL(path, site.url).toString();
