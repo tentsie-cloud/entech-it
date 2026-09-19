@@ -27,7 +27,7 @@ export default function EstimatePanel() {
                 initial={{ opacity: 0, transform: `translateY(${offsetY}px)` }}
                 animate={{ opacity: 1, transform: "translateY(0px)" }}
                 exit={{ opacity: 0, transform: `translateY(${-offsetY}px)` }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ type: "spring", bounce: 0, duration: 0.35 }}
               >
                 <h3 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                   {service.name}
@@ -78,7 +78,7 @@ export default function EstimatePanel() {
                 initial={{ opacity: 0, transform: `scale(${restScale})` }}
                 animate={{ opacity: 1, transform: "scale(1)" }}
                 exit={{ opacity: 0, transform: `scale(${restScale})` }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ type: "spring", bounce: 0, duration: 0.35 }}
                 className="font-display text-4xl font-extrabold text-foreground sm:text-5xl"
               >
                 {service.priceLabel}

@@ -30,7 +30,7 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <h1 className="text-balance font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="text-balance font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-6xl sm:tracking-[-0.03em] lg:text-7xl lg:tracking-[-0.035em]">
             Professional Computer, MacBook &amp; Console Repairs
           </h1>
 
