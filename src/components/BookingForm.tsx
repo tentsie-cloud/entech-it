@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { services } from "@/data/services";
 import { useSelection } from "@/context/selection-context";
 
@@ -10,6 +10,8 @@ type Status = "idle" | "submitting" | "success" | "error";
 export default function BookingForm() {
   const { selectedId, setSelectedId } = useSelection();
   const [status, setStatus] = useState<Status>("idle");
+  const reduceMotion = useReducedMotion();
+  const offsetY = reduceMotion ? 0 : 16;
 
   useEffect(() => {
     if (status === "success") {
@@ -48,13 +50,13 @@ export default function BookingForm() {
           </h2>
           <p className="mt-3 max-w-md text-muted">
             Tell us what&apos;s wrong and we&apos;ll come back to you with a
-            firm quote and drop-off time — usually within a few hours.
+            firm quote and drop-off time, usually within a few hours.
           </p>
         </div>
 
         <motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: offsetY }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -141,7 +143,7 @@ export default function BookingForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+            className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-accent-button px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-accent-button-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
             {status === "submitting" ? "Sending…" : "Send enquiry"}
           </button>
@@ -149,7 +151,7 @@ export default function BookingForm() {
           <p aria-live="polite" className="mt-3 text-sm">
             {status === "success" && (
               <span className="text-accent-strong">
-                Thanks — we&apos;ve got your enquiry and will be in touch shortly.
+                Thanks! We&apos;ve got your enquiry and will be in touch shortly.
               </span>
             )}
             {status === "error" && (

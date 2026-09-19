@@ -1,10 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Star } from "lucide-react";
 import { reviews } from "@/data/reviews";
 
 export default function Reviews() {
+  const reduceMotion = useReducedMotion();
+  const offsetY = reduceMotion ? 0 : 16;
+
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
       <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
@@ -27,7 +30,7 @@ export default function Reviews() {
         {reviews.map((review, i) => (
           <motion.figure
             key={review.name}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: offsetY }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}

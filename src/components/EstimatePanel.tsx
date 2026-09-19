@@ -86,7 +86,7 @@ export default function EstimatePanel() {
             </AnimatePresence>
             <a
               href="#book"
-              className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-full bg-accent-button px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-button-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:w-auto"
             >
               Book this repair
             </a>

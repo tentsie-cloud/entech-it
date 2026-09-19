@@ -12,6 +12,11 @@
   --accent: #1f6feb;
   --accent-soft: rgba(31, 111, 235, 0.1);
   --accent-strong: #1657c4;
+  /* Dedicated, theme-stable blue for filled white-text buttons: 5.17:1
+     against white, independent of --accent (which shifts per theme for
+     borders/text and doesn't always clear AA for button fills). */
+  --accent-button: #2563eb;
+  --accent-button-hover: #1d4ed8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,6 +45,8 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-strong: var(--accent-strong);
+  --color-accent-button: var(--accent-button);
+  --color-accent-button-hover: var(--accent-button-hover);
   --font-display: var(--font-manrope);
   --font-sans: var(--font-inter);
 }

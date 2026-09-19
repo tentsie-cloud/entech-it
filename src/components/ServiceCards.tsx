@@ -8,6 +8,7 @@ import { useSelection } from "@/context/selection-context";
 export default function ServiceCards() {
   const { selectedId, setSelectedId } = useSelection();
   const reduceMotion = useReducedMotion();
+  const offsetY = reduceMotion ? 0 : 16;
 
   return (
     <section id="services" className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
@@ -28,7 +29,7 @@ export default function ServiceCards() {
               key={service.id}
               type="button"
               onClick={() => setSelectedId(service.id)}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: offsetY }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -53,7 +54,7 @@ export default function ServiceCards() {
               ) : service.image ? (
                 <Image
                   src={service.image}
-                  alt={`${service.name} at ENTECH IT — ${service.tagline}`}
+                  alt={`${service.name} at ENTECH IT, ${service.tagline}`}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
