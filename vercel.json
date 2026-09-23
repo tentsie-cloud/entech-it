@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "tar -xzf entech-redesign.tar.gz",
+  "outputDirectory": "dist"
+}
